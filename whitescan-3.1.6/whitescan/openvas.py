@@ -1,5 +1,6 @@
 """whitescan.openvas"""
 import importlib
+import json
 import ipaddress
 import logging
 import os

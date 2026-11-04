@@ -1,5 +1,6 @@
 """whitescan.nmap_stage"""
 import os
+import subprocess
 import re
 import time
 import xml.etree.ElementTree as ET
