@@ -11,7 +11,7 @@ from .constants import SCAN_PROFILES
 from .process import ABORT, _iter_proc_lines, _register, _unregister, terminate_active
 from .report import save_reports
 from .util import (
-    C, banner, default_options, err, fix_perms, info, log, log_exc, nse_lines,
+    C, banner, default_options, err, fix_perms, info, log, log_exc, next_step, nse_lines,
     ok, os_note, sorted_hosts, warn,
 )
 
