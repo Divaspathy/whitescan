@@ -11,7 +11,7 @@ Thanks for your interest in improving WhiteScan.
 ## Development setup
 
 ```bash
-git clone https://github.com/YOUR_USER/whitescan.git
+git clone https://github.com/Divaspathy/whitescan.git
 cd whitescan
 python3 -m venv .venv
 source .venv/bin/activate

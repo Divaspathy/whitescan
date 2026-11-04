@@ -44,7 +44,7 @@ OpenVAS/GVM itself is separate (e.g. a local GVM install with `gvmd` and the def
 ### From a git clone (recommended for development)
 
 ```bash
-git clone https://github.com/YOUR_USER/whitescan.git
+git clone https://github.com/Divaspathy/whitescan.git
 cd whitescan
 
 # Optional: library for OpenVAS
@@ -156,7 +156,7 @@ See `whitescan --help` for the full reference.
 ## Development
 
 ```bash
-git clone https://github.com/YOUR_USER/whitescan.git
+git clone https://github.com/Divaspathy/whitescan.git
 cd whitescan
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
