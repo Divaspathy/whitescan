@@ -64,21 +64,34 @@ def _install_script_on_path():
         err("Cannot locate the running script to install.")
         return None
 
-    # Package lives next to the launcher in a source checkout
+    # Package lives next to the launcher in a source checkout.
+    # When already installed, argv[0] is /usr/bin/whitescan — fall back to
+    # the installed package under <prefix>/lib/whitescan and only refresh it
+    # if we can still see a source tree.
     src_dir = os.path.dirname(src)
     pkg_src = os.path.join(src_dir, "whitescan")
-    if not os.path.isdir(pkg_src) or not os.path.isfile(
-            os.path.join(pkg_src, "__main__.py")):
-        err(f"Cannot find the whitescan package next to {src}")
-        info("Expected: ./whitescan.py  and  ./whitescan/")
-        return None
-
     bindir, sudo_path = _pick_install_bindir()
-    # Prefer a libdir beside bindir (e.g. /usr/bin -> /usr/lib)
     parent = os.path.dirname(bindir.rstrip(os.sep)) or "/"
     libdir = os.path.join(parent, "lib")
     pkg_dst = os.path.join(libdir, "whitescan")
     target = os.path.join(bindir, "whitescan")
+
+    have_src = os.path.isdir(pkg_src) and os.path.isfile(
+        os.path.join(pkg_src, "__main__.py"))
+    have_dst = os.path.isdir(pkg_dst) and os.path.isfile(
+        os.path.join(pkg_dst, "__main__.py"))
+
+    if not have_src and have_dst:
+        # Re-running: sudo whitescan --setup  (credentials only / already installed)
+        ok(f"Already installed at {pkg_dst}")
+        info(f"launcher        : {target}")
+        return target
+
+    if not have_src:
+        err(f"Cannot find the whitescan package next to {src}")
+        info("Expected: ./whitescan.py  and  ./whitescan/")
+        info("Run from the source tree:  sudo python3 ./whitescan.py --setup")
+        return None
 
     info(f"sudo PATH       : {':'.join(sudo_path) if sudo_path else '(unknown)'}")
     info(f"package install : {pkg_dst}")
@@ -126,7 +139,7 @@ def _install_script_on_path():
             warn(f"Could not remove stale {stale}: {e}")
 
     return target
-
+    
 def _ensure_path_has(bindir):
     paths = os.environ.get("PATH", "").split(os.pathsep)
     if bindir not in paths:
