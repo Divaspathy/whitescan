@@ -334,6 +334,7 @@ Update the installation:
 ```bash
 source .venv/bin/activate
 python3 -m pip install -e ".[openvas]"
+sudo python3 ./whitescan.py --setup
 ```
 
 ## Uninstalling
