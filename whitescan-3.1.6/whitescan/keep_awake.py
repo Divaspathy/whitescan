@@ -1,5 +1,6 @@
 """whitescan.keep_awake"""
 import os
+import sys
 import pwd
 import re
 import shutil

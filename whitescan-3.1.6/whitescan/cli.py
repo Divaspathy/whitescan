@@ -1,5 +1,6 @@
 """CLI entry points and argument parsing."""
 import argparse
+import atexit
 import ipaddress
 import os
 import re
