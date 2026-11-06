@@ -334,6 +334,7 @@ Update the installation:
 ```bash
 source .venv/bin/activate
 python3 -m pip install -e ".[openvas]"
+cd whitescan/whitescan-3.1.6
 sudo python3 ./whitescan.py --setup
 ```
 
